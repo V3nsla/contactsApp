@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from '../contact';
 import { AbstractContactsService } from '../contact-service/abstract-contacts.service';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { FilterService } from 'src/app/services/filter.service';
 import { ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   filter$ = new Subject<string>();
+  favorites = false;
 
   constructor(
     private contactsService: AbstractContactsService,
@@ -47,5 +48,9 @@ export class ContactListComponent implements OnInit {
         this.contacts = this.contacts.filter(c => c !== contact);
       }
     });
+  }
+
+  favoriteEvent() {
+    this.favorites = !this.favorites;
   }
 }

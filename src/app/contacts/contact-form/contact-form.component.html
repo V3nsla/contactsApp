@@ -40,7 +40,7 @@
         <app-label (click)="addPhoneNumber()" class="clickable" icon="plus-circle">Add number</app-label>
       </div>
       <div class="p-grid p-justify-between">
-        <button class="p-lg-3 p-sm-5 cancel-button" (click)="navigateToContactList()" type="submit" [disabled]="!contactForm.valid">
+        <button class="p-lg-3 p-sm-5 cancel-button" (click)="navigateToContactList()">
           Cancel
         </button>
         <button class="p-lg-3 p-sm-5" type="submit" [disabled]="!contactForm.valid">
