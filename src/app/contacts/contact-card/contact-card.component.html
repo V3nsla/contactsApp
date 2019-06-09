@@ -1,0 +1,30 @@
+<article class="p-grid p-col-12 p-nogutter p-dir-rev" *ngIf="contact; else addNew">
+  <header class="p-grid p-col-3 p-lg-12">
+    <div class="p-col-4 p-lg-8 p-col-align-center">
+      <fa-icon *ngIf="contact.favorite" [icon]="['fas', 'heart']" (click)="favorite()"></fa-icon>
+      <fa-icon *ngIf="!contact.favorite" [icon]="['far', 'heart']" (click)="favorite()"></fa-icon>
+    </div>
+    <div class="p-col-4 p-lg-2 p-col-align-center">
+      <fa-icon icon="edit" [routerLink]="['contact-form', contact.id]"></fa-icon>
+    </div>
+    <div class="p-col-4 p-lg-2 p-col-align-center">
+      <fa-icon icon="trash-alt" (click)="delete(contact)"></fa-icon>
+    </div>
+  </header>
+  <figure class="clickable p-grid p-col-9 p-lg-12 " (click)="click()">
+    <div class="p-col-4 p-lg-12 picture">
+      <img
+        class="p-col-fixed"
+        src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500"
+        alt="Contact image"
+      />
+    </div>
+    <div class="p-col-8 p-lg-12 name">{{ contact?.firstName }} {{ contact?.lastName }}</div>
+  </figure>
+</article>
+
+<ng-template #addNew>
+  <article [routerLink]="['contact-form']" class="p-grid new-contact clickable">
+    <fa-icon class="p-col-12 p-col-align-center" icon="plus-circle"></fa-icon>
+  </article>
+</ng-template>

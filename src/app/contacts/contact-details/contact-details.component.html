@@ -1,0 +1,71 @@
+<article *ngIf="bigScreen; else smallScreen">
+  <div class="p-grid right">
+    <figure class="p-col-4 p-col-align-center">
+      <img
+        class="big-image p-col-fixed"
+        src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500"
+        alt="Contact image"
+      />
+    </figure>
+    <div class="p-col-5">
+      <div class="p-grid p-justify-between name-header">
+        <div class="p-col-1">
+          <fa-icon icon="arrow-left" [routerLink]="['/']" class="clickable"></fa-icon>
+        </div>
+        <div class="p-col-9 left">
+          {{ name }}
+        </div>
+        <div class="p-col-1">
+          <fa-icon *ngIf="contact.favorite" [icon]="['fas', 'heart']" class="clickable" (click)="favorite()"></fa-icon>
+          <fa-icon *ngIf="!contact.favorite" [icon]="['far', 'heart']" class="clickable" (click)="favorite()"></fa-icon>
+        </div>
+        <div class="p-col-1">
+          <fa-icon icon="edit" class="clickable" (click)="editContact()"></fa-icon>
+        </div>
+      </div>
+      <app-divider></app-divider>
+      <div class="p-grid">
+        <app-label class="p-lg-4 p-lg-offset-2 details-label" icon="envelope">E-mail</app-label>
+        <span class="p-lg-6 email">{{ contact.email }}</span>
+        <app-label class="p-lg-4 p-lg-offset-2 details-label" icon="phone">Numbers</app-label>
+        <app-phone-numbers class="p-col-6 phone-numbers" [phoneNumbers]="contact.phoneNumbers"></app-phone-numbers>
+      </div>
+    </div>
+  </div>
+</article>
+
+<ng-template #smallScreen>
+  <article>
+    <div class="p-grid small-header">
+      <div class="p-col-10">
+        <fa-icon icon="arrow-left" [routerLink]="['/']" class="clickable"></fa-icon>
+      </div>
+      <div class="p-col-1">
+        <fa-icon *ngIf="contact.favorite" [icon]="['fas', 'heart']" class="clickable" (click)="favorite()"></fa-icon>
+        <fa-icon *ngIf="!contact.favorite" [icon]="['far', 'heart']" class="clickable" (click)="favorite()"></fa-icon>
+      </div>
+      <div class="p-col-1">
+        <fa-icon icon="edit" class="clickable" (click)="editContact()"></fa-icon>
+      </div>
+    </div>
+    <div class="p-grid p-justify-center">
+      <figure class="p-col-4">
+        <img
+          class="p-col-fixed small-image"
+          src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500"
+          alt="Contact image"
+        />
+      </figure>
+      <div class="p-col-8 p-col-align-center name-header left">
+        {{ name }}
+      </div>
+    </div>
+    <app-divider></app-divider>
+    <div class="p-grid p-justify-end">
+      <app-label class="p-col-10  details-label" icon="envelope">E-mail</app-label>
+      <span class="p-col-10 email">{{ contact.email }}</span>
+      <app-label class="p-col-10 details-label" icon="phone">Numbers</app-label>
+      <app-phone-numbers class="p-col-10 phone-numbers" [phoneNumbers]="contact.phoneNumbers"></app-phone-numbers>
+    </div>
+  </article>
+</ng-template>

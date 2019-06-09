@@ -1,0 +1,17 @@
+<app-divider></app-divider>
+<div class="p-grid">
+  <div class="p-col-12 p-sm-12 p-lg-12">
+    <input class="p-col-12 p-sm-12 p-lg-4 p-lg-offset-4 " (keyup)="filter$.next($event.target.value)" />
+  </div>
+  <div class="p-col-12 p-sm-12 p-lg-3">
+    <app-contact-card></app-contact-card>
+  </div>
+  <div class="p-col-12 p-sm-12 p-lg-3" *ngFor="let contact of contacts">
+    <app-contact-card
+      [contact]="contact"
+      (clicked)="click($event)"
+      (deleted)="delete($event)"
+      (favorited)="favorite($event)"
+    ></app-contact-card>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<form *ngIf="contactForm" [formGroup]="contactForm" (ngSubmit)="saveContact()">
+  <div class="p-grid">
+    <div class="p-col-4"></div>
+    <div class="p-col-5">
+      <div class="p-grid p-justify-between name-header">
+        <div class="p-col-3">
+          <fa-icon icon="arrow-left" [routerLink]="['/']" class="clickable"></fa-icon>
+        </div>
+        <div *ngIf="editMode" class="p-lg-3 p-sm-8">
+          <app-label (click)="deleteContact()" icon="trash-alt" class="clickable">Delete</app-label>
+        </div>
+      </div>
+      <app-divider></app-divider>
+
+      <app-label icon="user">first name</app-label>
+      <input type="text" class="p-lg-6 p-col-sm-12" placeholder="First Name" formControlName="firstName" />
+      <app-divider></app-divider>
+
+      <app-label icon="user">last name</app-label>
+      <input type="text" class="p-lg-6 p-col-sm-12" placeholder="Last Name" formControlName="lastName" />
+      <app-divider></app-divider>
+
+      <app-label icon="envelope">email</app-label>
+      <input type="text" class="p-lg-6 p-col-sm-12" placeholder="Email" formControlName="email" />
+      <app-divider></app-divider>
+
+      <app-label icon="phone">numbers</app-label>
+      <div formArrayName="phoneNumbers">
+        <div class="p-grid" *ngFor="let phone of phoneNumbers.controls; let i = index" [formGroupName]="i">
+          <div class="p-sm-12 p-lg-6">
+            <input type="text" class="p-col" placeholder="Number" formControlName="number" />
+          </div>
+          <div class="p-sm-10 p-lg-5">
+            <input type="text" class="p-col" placeholder="Label" formControlName="label" />
+          </div>
+          <div class="p-sm-2 p-lg-1 delete-icon">
+            <fa-icon (click)="deletePhoneNumber(i)" class="clickable" icon="minus-circle"></fa-icon>
+          </div>
+        </div>
+        <app-label (click)="addPhoneNumber()" class="clickable" icon="plus-circle">Add number</app-label>
+      </div>
+      <div class="p-grid p-justify-between">
+        <button class="p-lg-3 p-sm-5 cancel-button" (click)="navigateToContactList()" type="submit" [disabled]="!contactForm.valid">
+          Cancel
+        </button>
+        <button class="p-lg-3 p-sm-5" type="submit" [disabled]="!contactForm.valid">
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

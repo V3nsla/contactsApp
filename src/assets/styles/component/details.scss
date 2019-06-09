@@ -1,0 +1,46 @@
+app-contact-details {
+  & article {
+    & figure {
+      margin: 0;
+    }
+
+    & img.big-image {
+      height: $profilePictureSize * 1.5;
+      width: $profilePictureSize * 1.5;
+    }
+
+    & img.small-image {
+      height: $profilePictureSize;
+      width: $profilePictureSize;
+    }
+  }
+
+  .details-label {
+    text-align: left;
+  }
+
+  .phone-numbers {
+    padding: 0px;
+    font-size: 20px;
+  }
+
+  .email {
+    font-size: 20px;
+  }
+
+  .left {
+    text-align: left;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .name-header {
+    font-size: 25px;
+  }
+
+  .small-header {
+    border-bottom: 1px solid $secondaryColor;
+  }
+}

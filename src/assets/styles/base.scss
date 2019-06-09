@@ -1,0 +1,54 @@
+body {
+  color: $secondaryColor;
+  font-family: 'Roboto', sans-serif;
+
+  .p-grid {
+    margin: 0px;
+  }
+
+  .ui-card {
+    color: $secondaryColor;
+    border: solid 1px $secondaryColor;
+    box-shadow: none;
+
+    fa-icon {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    border-radius: 50%;
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+
+  button {
+    border: none;
+    border-radius: 15px;
+    color: white;
+    height: 35px;
+    background-color: $primaryColor;
+  }
+
+  input {
+    height: 60px;
+    width: 100%;
+    border: none;
+    border: solid 1px $secondaryColor;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  input:focus {
+    border: none;
+    border: solid 1px $primaryColor;
+    border-radius: 10px;
+    outline: 0 none;
+  }
+
+  input::placeholder {
+    color: lightgray;
+  }
+}

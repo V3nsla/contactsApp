@@ -1,0 +1,38 @@
+app-contact-card {
+  & article {
+    color: $secondaryColor;
+    border: solid 1px $secondaryColor;
+    box-shadow: none;
+
+    fa-icon {
+      cursor: pointer;
+    }
+
+    & img {
+      height: $profilePictureSize;
+      width: $profilePictureSize;
+    }
+  }
+
+  .name {
+    text-align: center;
+    font-size: $baseFontSize;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .picture {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .new-contact {
+    height: 100%;
+    border-color: $primaryColor;
+    font-size: 65px;
+    color: $primaryColor;
+    text-align: center;
+  }
+}
