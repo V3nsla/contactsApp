@@ -1,4 +1,16 @@
-<button (click)="favoriteEvent()">Switch favorite</button>
+<nav class="p-grid p-col-12">
+  <div class="p-col flex-align-row-end" [ngStyle]="{ 'border-right': '2px solid' }">
+    <a class="clickable" [ngClass]="{ 'primary-color': !favorites, 'secondary-color': favorites }" (click)="favorites = false">
+      All contacts
+    </a>
+  </div>
+  <div class="p-col dlex-align-row-start">
+    <a class="clickable" [ngClass]="{ 'primary-color': favorites, 'secondary-color': !favorites }" (click)="favorites = true">
+      My favorites
+    </a>
+  </div>
+</nav>
+
 <app-divider></app-divider>
 <div class="p-grid">
   <div class="p-col-12 p-sm-12 p-lg-12">
@@ -33,3 +45,5 @@
     </ng-container>
   </ng-container>
 </div>
+
+<app-confirm-dialog [displayDialog]="displayDialog" (confirmed)="deleteContact()" (canceled)="deleteCanceled()"></app-confirm-dialog>

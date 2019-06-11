@@ -23,37 +23,37 @@ export class ContactsLSService extends AbstractContactsService {
     return this.getAll().pipe(map(contacts => contacts.find(epic => epic.id === id)));
   }
 
-  save(contact: Contact) {
-    this.getAll().subscribe(contacts => {
-      contact.id = this.getNextId();
-      contacts.push(contact);
-      localStorage.setItem(this.CONTACTS_KEY, JSON.stringify(contacts));
-    });
+  save(contact: Contact): Observable<Contact> {
+    const contactsCopy = this.contacts.slice();
+    contact.id = this.getNextId();
+    contactsCopy.push(contact);
+    localStorage.setItem(this.CONTACTS_KEY, JSON.stringify(contactsCopy));
+    return of(contact);
   }
 
-  saveAll(contacts: Contact[]) {
+  update(contact: Contact): Observable<Contact> {
+    const contactsCopy = this.contacts.slice();
+    this.contacts.map((c, i) => {
+      if (c.id === contact.id) {
+        contactsCopy[i] = contact;
+      }
+    });
+    this.saveAll(contactsCopy);
+    return of(contact);
+  }
+
+  deleteById(id: number): Observable<{}> {
+    const contactsCopy = this.contacts.slice();
+    this.saveAll(contactsCopy.filter(c => c.id !== id));
+    return of({});
+  }
+
+  private get contacts() {
+    return JSON.parse(localStorage.getItem(this.CONTACTS_KEY)) as Contact[];
+  }
+
+  private saveAll(contacts: Contact[]) {
     localStorage.setItem(this.CONTACTS_KEY, JSON.stringify(contacts));
-  }
-
-  update(contact: Contact) {
-    this.getAll().subscribe(contacts => {
-      contacts.map((c, i) => {
-        if (c.id === contact.id) {
-          contacts[i] = contact;
-        }
-      });
-      this.saveAll(contacts);
-    });
-  }
-
-  deleteById(id: number) {
-    this.getAll().subscribe(contacts => {
-      this.saveAll(contacts.filter(c => c.id !== id));
-    });
-  }
-
-  deleteAll() {
-    localStorage.removeItem(this.CONTACTS_KEY);
   }
 
   private getNextId(): number {

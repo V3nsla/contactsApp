@@ -10,13 +10,9 @@ app-contact-details {
     }
 
     & img.small-image {
-      height: $profilePictureSize;
-      width: $profilePictureSize;
+      height: $profilePictureSize / 1.5;
+      width: $profilePictureSize / 1.5;
     }
-  }
-
-  .details-label {
-    text-align: left;
   }
 
   .phone-numbers {
@@ -38,6 +34,7 @@ app-contact-details {
 
   .name-header {
     font-size: 25px;
+    font-weight: bold;
   }
 
   .small-header {

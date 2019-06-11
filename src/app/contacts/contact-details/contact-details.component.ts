@@ -42,7 +42,7 @@ export class ContactDetailsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want delete this contact?',
       accept: () => {
-        this.contactService.deleteById(this.contact.id);
+        this.contactService.deleteById(this.contact.id).subscribe();
         this.navigateToContactList();
       }
     });
@@ -50,7 +50,7 @@ export class ContactDetailsComponent implements OnInit {
 
   favorite() {
     this.contact.favorite = !this.contact.favorite;
-    this.contactService.update(this.contact);
+    this.contactService.update(this.contact).subscribe();
   }
 
   editContact() {

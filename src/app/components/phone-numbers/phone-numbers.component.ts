@@ -9,6 +9,8 @@ import { PhoneNumber } from './phone-number';
 export class PhoneNumbersComponent implements OnInit {
   @Input() phoneNumbers: PhoneNumber[];
 
+  @Input() colLabel = 6;
+  @Input() colPhone = 6;
   constructor() {}
 
   ngOnInit() {}

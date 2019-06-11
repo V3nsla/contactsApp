@@ -24,14 +24,6 @@ body {
     cursor: pointer;
   }
 
-  button {
-    border: none;
-    border-radius: 15px;
-    color: white;
-    height: 35px;
-    background-color: $primaryColor;
-  }
-
   input {
     height: 60px;
     width: 100%;
@@ -39,6 +31,7 @@ body {
     border: solid 1px $secondaryColor;
     border-radius: 10px;
     outline: none;
+    padding-left: 5px;
   }
 
   input:focus {
@@ -50,5 +43,52 @@ body {
 
   input::placeholder {
     color: lightgray;
+    padding-left: 5px;
   }
+
+  button {
+    outline: none;
+  }
+  button:active:focus {
+    border: solid;
+  }
+}
+
+.btn {
+  border: none;
+  border-radius: 15px;
+  color: white;
+  height: 35px;
+  padding: 0px 20px;
+  &.cancel-btn {
+    background-color: $secondaryColor;
+  }
+
+  &.confirm-btn {
+    background-color: $primaryColor;
+  }
+}
+
+.round-btn {
+  background-color: transparent;
+  border-radius: 50%;
+  border: solid;
+  height: 40px;
+  width: 40px;
+
+  &.delete {
+    color: $secondaryColor;
+  }
+
+  &.add {
+    color: $primaryColor;
+  }
+}
+
+.primary-color {
+  color: $primaryColor;
+}
+
+.secondary-color {
+  color: $secondaryColor;
 }

@@ -1,38 +1,38 @@
 app-contact-card {
   & article {
     color: $secondaryColor;
-    border: solid 1px $secondaryColor;
+    border: solid 3px $secondaryColorLight;
     box-shadow: none;
 
     fa-icon {
       cursor: pointer;
     }
-
-    & img {
-      height: $profilePictureSize;
-      width: $profilePictureSize;
-    }
   }
 
   .name {
-    text-align: center;
-    font-size: $baseFontSize;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    font-weight: bold;
+    font-size: 25px;
   }
 
-  .picture {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  .big-picture {
+    height: $profilePictureSize;
+    width: $profilePictureSize;
+  }
+
+  .small-picture {
+    height: $profilePictureSize / 2;
+    width: $profilePictureSize / 2;
   }
 
   .new-contact {
     height: 100%;
-    border-color: $primaryColor;
-    font-size: 65px;
+    border: 3px dashed $primaryColorLight;
+    border-radius: 5px;
     color: $primaryColor;
-    text-align: center;
+  }
+
+  .new-contact-small {
+    @extend .new-contact;
+    font-size: 35px;
   }
 }

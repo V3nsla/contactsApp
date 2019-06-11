@@ -16,6 +16,7 @@ export class ContactFormComponent implements OnInit {
   contact: Contact;
   id: number;
   editMode: boolean;
+  displayDialog = false;
 
   get phoneNumbers() {
     return this.contactForm.get('phoneNumbers') as FormArray;
@@ -54,9 +55,9 @@ export class ContactFormComponent implements OnInit {
 
   saveContact() {
     if (this.editMode) {
-      this.contactService.update(this.contactForm.value);
+      this.contactService.update(this.contactForm.value).subscribe(() => this.navigateToContactList());
     } else {
-      this.contactService.save(this.contactForm.value);
+      this.contactService.save(this.contactForm.value).subscribe(() => this.navigateToContactList());
     }
     this.navigateToContactList();
   }
@@ -83,24 +84,28 @@ export class ContactFormComponent implements OnInit {
   }
 
   private initPhonesArray(phoneNumbers: PhoneNumber[]): FormArray {
-    const phones = this.fb.array([this.fb.group({ label: [''], number: [''] })]);
+    const phones = this.fb.array([this.fb.group({ label: ['', Validators.required], number: ['', Validators.required] })]);
     if (phoneNumbers) {
       phones.removeAt(0);
       phoneNumbers.forEach(phone => {
-        phones.push(this.fb.group({ label: [phone.label], number: [phone.number] }));
+        phones.push(this.fb.group({ label: [phone.label, Validators.required], number: [phone.number, Validators.required] }));
       });
     }
     return phones;
   }
 
+  delete() {
+    this.displayDialog = true;
+  }
+
+  deleteCanceled() {
+    this.displayDialog = false;
+  }
+
   deleteContact() {
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want delete this contact?',
-      accept: () => {
-        this.contactService.deleteById(this.contact.id);
-        this.navigateToContactList();
-      }
-    });
+    this.contactService.deleteById(this.contact.id).subscribe();
+    this.displayDialog = false;
+    this.navigateToContactList();
   }
 
   private navigateToContactList() {

@@ -8,13 +8,9 @@ export abstract class AbstractContactsService {
 
   abstract getById(id: number): Observable<Contact>;
 
-  abstract save(contact: Contact);
+  abstract save(contact: Contact): Observable<Contact>;
 
-  abstract saveAll(contacts: Contact[]);
+  abstract update(contact: Contact): Observable<Contact>;
 
-  abstract update(contact: Contact);
-
-  abstract deleteById(id: number);
-
-  abstract deleteAll();
+  abstract deleteById(id: number): Observable<{}>;
 }

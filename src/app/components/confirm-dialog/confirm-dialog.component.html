@@ -1,0 +1,12 @@
+<p-dialog [header]="title" [(visible)]="displayDialog" [modal]="true" [closable]="false">
+  <p>{{ message }}</p>
+
+  <section class="p-grid p-dir-rev">
+    <div class="p-col-12 p-lg-6 flex-align-row-center">
+      <button class="btn confirm-btn" (click)="confirm()">{{ label }}</button>
+    </div>
+    <div class="p-col-12 p-lg-6 flex-align-row-center">
+      <button class="btn cancel-btn" (click)="cancel()">Cancel</button>
+    </div>
+  </section>
+</p-dialog>

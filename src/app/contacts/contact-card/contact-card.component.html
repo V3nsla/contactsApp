@@ -1,30 +1,38 @@
 <article class="p-grid p-col-12 p-nogutter p-dir-rev" *ngIf="contact; else addNew">
   <header class="p-grid p-col-3 p-lg-12">
-    <div class="p-col-4 p-lg-8 p-col-align-center">
+    <div class="p-col-4 p-lg-10 p-col-align-center">
       <fa-icon *ngIf="contact.favorite" [icon]="['fas', 'heart']" (click)="favorite()"></fa-icon>
       <fa-icon *ngIf="!contact.favorite" [icon]="['far', 'heart']" (click)="favorite()"></fa-icon>
     </div>
-    <div class="p-col-4 p-lg-2 p-col-align-center">
+    <div class="p-col-4 p-lg-1 p-col-align-center">
       <fa-icon icon="edit" [routerLink]="['contact-form', contact.id]"></fa-icon>
     </div>
-    <div class="p-col-4 p-lg-2 p-col-align-center">
+    <div class="p-col-4 p-lg-1 p-col-align-center">
       <fa-icon icon="trash-alt" (click)="delete(contact)"></fa-icon>
     </div>
   </header>
-  <figure class="clickable p-grid p-col-9 p-lg-12 " (click)="click()">
-    <div class="p-col-4 p-lg-12 picture">
+  <figure ngClass="clickable p-grid p-col-9 p-lg-12" (click)="click()">
+    <div ngClass="p-col-3 p-lg-12 flex-align-row-center  p-col-fixed">
       <img
-        class="p-col-fixed"
+        ngClass="big-picture"
+        [ngClass.lt-md]="{ 'big-picture': false, 'small-picture': true }"
         src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500"
         alt="Contact image"
       />
     </div>
-    <div class="p-col-8 p-lg-12 name">{{ contact?.firstName }} {{ contact?.lastName }}</div>
+    <div ngClass="p-col-9 p-lg-12 name">
+      <div ngClass="flex-align-row-center" [ngClass.lt-md]="{ 'flex-align-row-center': false, 'flex-align-column-center': true }">
+        {{ contact?.firstName }} {{ contact?.lastName }}
+      </div>
+    </div>
   </figure>
 </article>
 
 <ng-template #addNew>
   <article [routerLink]="['contact-form']" class="p-grid new-contact clickable">
-    <fa-icon class="p-col-12 p-col-align-center" icon="plus-circle"></fa-icon>
+    <div class="p-col-12 flex-align-row-center flex-align-column-center">
+      <fa-icon icon="plus-circle"></fa-icon>
+    </div>
+    <div class="p-col-12 name">New contact</div>
   </article>
 </ng-template>

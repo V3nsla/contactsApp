@@ -13,8 +13,11 @@ import { Router } from '@angular/router';
 })
 export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
+  selectedContact: Contact;
+
   filter$ = new Subject<string>();
   favorites = false;
+  displayDialog = false;
 
   constructor(
     private contactsService: AbstractContactsService,
@@ -33,21 +36,27 @@ export class ContactListComponent implements OnInit {
   }
 
   favorite(contact: Contact) {
-    this.contactsService.update(contact);
+    this.contactsService.update(contact).subscribe();
   }
 
   click(id: number) {
+    console.log(id);
     this.router.navigate(['/contact-details/' + id]);
   }
 
   delete(contact: Contact) {
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want delete this contact?',
-      accept: () => {
-        this.contactsService.deleteById(contact.id);
-        this.contacts = this.contacts.filter(c => c !== contact);
-      }
-    });
+    this.selectedContact = contact;
+    this.displayDialog = true;
+  }
+
+  deleteCanceled() {
+    this.displayDialog = false;
+  }
+
+  deleteContact() {
+    this.contactsService.deleteById(this.selectedContact.id).subscribe();
+    this.contacts = this.contacts.filter(c => c !== this.selectedContact);
+    this.displayDialog = false;
   }
 
   favoriteEvent() {
