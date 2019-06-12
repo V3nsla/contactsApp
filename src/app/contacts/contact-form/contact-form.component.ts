@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractContactsService } from '../contact-service/abstract-contacts.service';
-import { FormBuilder, Validators, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Contact } from '../contact';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PhoneNumber } from '../../components/phone-numbers/phone-number';
@@ -18,16 +18,19 @@ export class ContactFormComponent implements OnInit {
   editMode: boolean;
   displayDialog = false;
 
-  get phoneNumbers() {
+  get phoneNumbers(): FormArray {
     return this.contactForm.get('phoneNumbers') as FormArray;
+  }
+
+  get pictureUrl(): FormControl {
+    return this.contactForm.get('pictureUrl') as FormControl;
   }
 
   constructor(
     private contactService: AbstractContactsService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
-    private confirmationService: ConfirmationService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -46,7 +49,7 @@ export class ContactFormComponent implements OnInit {
   }
 
   addPhoneNumber() {
-    this.phoneNumbers.push(this.fb.group({ label: [''], number: [''] }));
+    this.phoneNumbers.push(this.fb.group({ label: ['', Validators.required], number: ['', Validators.required] }));
   }
 
   deletePhoneNumber(index: number) {
@@ -54,30 +57,36 @@ export class ContactFormComponent implements OnInit {
   }
 
   saveContact() {
+    this.mapToContact(this.contactForm);
     if (this.editMode) {
-      this.contactService.update(this.contactForm.value).subscribe(() => this.navigateToContactList());
+      this.contactService.update(this.contact).subscribe(() => this.navigateToContactList());
     } else {
-      this.contactService.save(this.contactForm.value).subscribe(() => this.navigateToContactList());
+      this.contactService.save(this.contact).subscribe(() => this.navigateToContactList());
     }
     this.navigateToContactList();
   }
 
   private initNewForm() {
     this.contactForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.email],
+      fullName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      pictureUrl: [''],
       favorite: [false],
       phoneNumbers: this.fb.array([this.fb.group({ label: [''], number: [''] })])
     });
   }
 
   private initEditForm(contact: Contact) {
+    let fullName = contact.firstName;
+    if (contact.lastName) {
+      fullName += ' ' + contact.lastName;
+    }
+
     this.contactForm = this.fb.group({
       id: [this.id],
-      firstName: [contact.firstName, Validators.required],
-      lastName: [contact.lastName, Validators.required],
-      email: [contact.email, Validators.email],
+      fullName: [fullName, Validators.required],
+      email: [contact.email, [Validators.required, Validators.email]],
+      pictureUrl: [contact.pictureUrl],
       favorite: [contact.favorite],
       phoneNumbers: this.initPhonesArray(contact.phoneNumbers)
     });
@@ -92,6 +101,18 @@ export class ContactFormComponent implements OnInit {
       });
     }
     return phones;
+  }
+
+  private mapToContact(formGroup: FormGroup) {
+    this.contact = formGroup.value;
+    const fullName = formGroup.get('fullName').value as string;
+    delete this.contact['fullName'];
+    this.contact.firstName = fullName.split(' ')[0];
+    const lastName = fullName.split(' ')[1];
+
+    if (lastName) {
+      this.contact.lastName = lastName;
+    }
   }
 
   delete() {

@@ -3,13 +3,19 @@ import { AbstractContactsService } from './abstract-contacts.service';
 import { Contact } from '../contact';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { defaultContacts } from './default-contacts';
 
 @Injectable()
 export class ContactsLSService extends AbstractContactsService {
   CONTACTS_KEY = 'contacts';
 
+  private get contacts() {
+    return JSON.parse(localStorage.getItem(this.CONTACTS_KEY)) as Contact[];
+  }
+
   constructor() {
     super();
+    this.saveAll(defaultContacts);
   }
 
   getAll(): Observable<Contact[]> {
@@ -20,7 +26,7 @@ export class ContactsLSService extends AbstractContactsService {
   }
 
   getById(id: number): Observable<Contact> {
-    return this.getAll().pipe(map(contacts => contacts.find(epic => epic.id === id)));
+    return this.getAll().pipe(map(contacts => contacts.find(item => item.id === id)));
   }
 
   save(contact: Contact): Observable<Contact> {
@@ -46,10 +52,6 @@ export class ContactsLSService extends AbstractContactsService {
     const contactsCopy = this.contacts.slice();
     this.saveAll(contactsCopy.filter(c => c.id !== id));
     return of({});
-  }
-
-  private get contacts() {
-    return JSON.parse(localStorage.getItem(this.CONTACTS_KEY)) as Contact[];
   }
 
   private saveAll(contacts: Contact[]) {

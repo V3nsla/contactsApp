@@ -16,7 +16,7 @@
       <img
         ngClass="big-picture"
         [ngClass.lt-md]="{ 'big-picture': false, 'small-picture': true }"
-        src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500"
+        src="{{ contact.pictureUrl }}"
         alt="Contact image"
       />
     </div>
@@ -30,9 +30,9 @@
 
 <ng-template #addNew>
   <article [routerLink]="['contact-form']" class="p-grid new-contact clickable">
-    <div class="p-col-12 flex-align-row-center flex-align-column-center">
-      <fa-icon icon="plus-circle"></fa-icon>
+    <div class="p-col-12 flex-justify-content flex-align-column-end new-icon">
+      <fa-icon icon="plus"></fa-icon>
     </div>
-    <div class="p-col-12 name">New contact</div>
+    <div class="p-col-12 name flex-justify-content flex-align-column-start new-text">New contact</div>
   </article>
 </ng-template>

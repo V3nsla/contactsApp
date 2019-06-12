@@ -1,0 +1,20 @@
+app-profile-picture-upload {
+  & figure {
+    margin: 0;
+    background-color: $primaryColor;
+    border-radius: 56%;
+    height: $profilePictureSize * 1.5;
+    width: $profilePictureSize * 1.5;
+    @extend .flex-justify-content;
+  }
+
+  & img {
+    height: 100%;
+    width: 100%;
+  }
+
+  & .icon {
+    color: white;
+    font-size: $baseFontSize * 2;
+  }
+}

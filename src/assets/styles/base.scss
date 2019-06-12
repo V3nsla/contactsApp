@@ -6,16 +6,6 @@ body {
     margin: 0px;
   }
 
-  .ui-card {
-    color: $secondaryColor;
-    border: solid 1px $secondaryColor;
-    box-shadow: none;
-
-    fa-icon {
-      cursor: pointer;
-    }
-  }
-
   img {
     border-radius: 50%;
   }
@@ -43,12 +33,16 @@ body {
 
   input::placeholder {
     color: lightgray;
-    padding-left: 5px;
+  }
+
+  input.ng-invalid.ng-touched {
+    border: 1px solid red;
   }
 
   button {
     outline: none;
   }
+
   button:active:focus {
     border: solid;
   }
@@ -91,4 +85,14 @@ body {
 
 .secondary-color {
   color: $secondaryColor;
+}
+
+.label {
+  font-size: $mediumFontSize;
+  color: $primaryColor;
+}
+
+.label-icon {
+  margin-right: 15px;
+  color: $primaryColor;
 }

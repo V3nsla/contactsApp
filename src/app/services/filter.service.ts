@@ -22,11 +22,10 @@ export class FilterService {
     return this.contactService.getAll().pipe(
       map(contacts => {
         return contacts.filter(item => {
-          return Object.keys(item).some(k => {
-            if (typeof item[k] === 'string') {
-              return item[k].toLowerCase().includes(filterText.toLowerCase());
-            }
-          });
+          return (
+            item['firstName'].toLowerCase().includes(filterText.toLowerCase()) ||
+            item['lastName'].toLowerCase().includes(filterText.toLowerCase())
+          );
         });
       })
     );

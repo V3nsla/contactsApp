@@ -1,4 +1,10 @@
-.delete-icon {
-  font-size: 25px;
-  margin: auto;
+app-contact-form {
+  .delete-icon {
+    font-size: $largeFontSize;
+    margin: auto;
+  }
+
+  .disabled {
+    opacity: 0.5;
+  }
 }

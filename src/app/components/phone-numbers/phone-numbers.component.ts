@@ -11,6 +11,7 @@ export class PhoneNumbersComponent implements OnInit {
 
   @Input() colLabel = 6;
   @Input() colPhone = 6;
+
   constructor() {}
 
   ngOnInit() {}

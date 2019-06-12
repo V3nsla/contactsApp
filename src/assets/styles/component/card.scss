@@ -11,7 +11,7 @@ app-contact-card {
 
   .name {
     font-weight: bold;
-    font-size: 25px;
+    font-size: $largeFontSize;
   }
 
   .big-picture {
@@ -31,8 +31,12 @@ app-contact-card {
     color: $primaryColor;
   }
 
-  .new-contact-small {
-    @extend .new-contact;
-    font-size: 35px;
+  .new-icon {
+    padding-bottom: 0px;
+    font-size: 30px;
+  }
+
+  .new-text {
+    padding-top: 0px;
   }
 }

@@ -17,15 +17,11 @@ app-contact-details {
 
   .phone-numbers {
     padding: 0px;
-    font-size: 20px;
+    font-size: $mediumFontSize;
   }
 
   .email {
-    font-size: 20px;
-  }
-
-  .left {
-    text-align: left;
+    font-size: $mediumFontSize;
   }
 
   .right {
@@ -33,7 +29,7 @@ app-contact-details {
   }
 
   .name-header {
-    font-size: 25px;
+    font-size: $largeFontSize;
     font-weight: bold;
   }
 

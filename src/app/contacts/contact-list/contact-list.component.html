@@ -13,15 +13,15 @@
 
 <app-divider></app-divider>
 <div class="p-grid">
-  <div class="p-col-12 p-sm-12 p-lg-12">
-    <input class="p-col-12 p-sm-12 p-lg-4 p-lg-offset-4 " (keyup)="filter$.next($event.target.value)" />
+  <div class="p-col-12">
+    <input class="p-col-12 p-lg-4 p-lg-offset-4 " (keyup)="filter$.next($event.target.value)" />
   </div>
-  <div class="p-col-12 p-sm-12 p-lg-3">
+  <div class="p-col-12 p-lg-3">
     <app-contact-card></app-contact-card>
   </div>
   <ng-container *ngIf="!favorites">
     <ng-container *ngFor="let contact of contacts">
-      <div class="p-col-12 p-sm-12 p-lg-3">
+      <div class="p-col-12 p-lg-3">
         <app-contact-card
           [contact]="contact"
           (clicked)="click($event)"
@@ -34,7 +34,7 @@
 
   <ng-container *ngIf="favorites">
     <ng-container *ngFor="let contact of contacts">
-      <div *ngIf="contact.favorite" class="p-col-12 p-sm-12 p-lg-3">
+      <div *ngIf="contact.favorite" class="p-col-12 p-lg-3">
         <app-contact-card
           [contact]="contact"
           (clicked)="click($event)"

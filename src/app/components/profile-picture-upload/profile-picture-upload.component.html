@@ -1,0 +1,6 @@
+<figure>
+  <img *ngIf="pictureUrl" src="{{ pictureUrl }}" alt="Contact image" (error)="pictureUrl = 'assets/images/placeholder.png'" />
+  <div *ngIf="!pictureUrl" class="icon">
+    <fa-icon icon="upload"></fa-icon>
+  </div>
+</figure>

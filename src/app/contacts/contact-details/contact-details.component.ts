@@ -21,7 +21,6 @@ export class ContactDetailsComponent implements OnInit {
     private contactService: AbstractContactsService,
     private route: ActivatedRoute,
     private router: Router,
-    private confirmationService: ConfirmationService,
     public breakpointObserver: BreakpointObserver
   ) {}
 
@@ -38,16 +37,6 @@ export class ContactDetailsComponent implements OnInit {
     });
   }
 
-  deleteContact() {
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want delete this contact?',
-      accept: () => {
-        this.contactService.deleteById(this.contact.id).subscribe();
-        this.navigateToContactList();
-      }
-    });
-  }
-
   favorite() {
     this.contact.favorite = !this.contact.favorite;
     this.contactService.update(this.contact).subscribe();
@@ -55,9 +44,5 @@ export class ContactDetailsComponent implements OnInit {
 
   editContact() {
     this.router.navigateByUrl('/contact-form/' + this.contact.id);
-  }
-
-  private navigateToContactList() {
-    this.router.navigateByUrl('/');
   }
 }
